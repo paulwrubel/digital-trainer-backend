@@ -35,6 +35,7 @@ func main() {
 func initLogger() *logrus.Logger {
 	log := logrus.New()
 	log.SetOutput(os.Stdout)
+
 	switch strings.ToUpper(os.Getenv("DTB_LOG_LEVEL")) {
 	case "TRACE":
 		log.SetLevel(logrus.TraceLevel)
