@@ -10,12 +10,12 @@ import (
 func listenAndServe(log *logrus.Logger, appData *appData) {
 	router := mux.NewRouter().PathPrefix("/v1").Subrouter()
 
-	// /activity
-	router.Path("/activity/{id}").HandlerFunc(getActivitiesGetHandlerFunc(log, appData)).Methods("GET")
-	router.Path("/activity").HandlerFunc(getActivitiesGetAllHandlerFunc(log, appData)).Methods("GET")
-	router.Path("/activity").HandlerFunc(getActivitiesPostHandlerFunc(log, appData)).Methods("POST")
-	router.Path("/activity/{id}").HandlerFunc(getActivitiesPutHandlerFunc(log, appData)).Methods("PUT")
-	router.Path("/activity/{id}").HandlerFunc(getActivitiesDeleteHandlerFunc(log, appData)).Methods("DELETE")
+	// /activities
+	router.Path("/activities/{id}").HandlerFunc(getActivitiesGetHandlerFunc(log, appData)).Methods("GET")
+	router.Path("/activities").HandlerFunc(getActivitiesGetAllHandlerFunc(log, appData)).Methods("GET")
+	router.Path("/activities").HandlerFunc(getActivitiesPostHandlerFunc(log, appData)).Methods("POST")
+	router.Path("/activities/{id}").HandlerFunc(getActivitiesPutHandlerFunc(log, appData)).Methods("PUT")
+	router.Path("/activities/{id}").HandlerFunc(getActivitiesDeleteHandlerFunc(log, appData)).Methods("DELETE")
 
 	// /workouts
 	router.Path("/workouts/{id}").HandlerFunc(getWorkoutsGetHandlerFunc(log, appData)).Methods("GET")
