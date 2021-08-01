@@ -13,6 +13,7 @@ all: build
 build: $(GO_SOURCES)
 	GOOS=linux \
 	GOARCH=amd64 \
+    CGO_ENABLED=0 \
 	$(GOBUILD) -o $(BINARY_NAME) .
 vet:
 	# go vet
