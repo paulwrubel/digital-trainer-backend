@@ -124,6 +124,7 @@ func controllerDecodeRequest(rw http.ResponseWriter, log *logrus.Entry, rc io.Re
 
 func controllerEncodeResponse(rw http.ResponseWriter, log *logrus.Entry, statusCode int, v interface{}) error {
 	// encode response
+	rw.Header().Add("Content-Type", "application/json")
 	err := json.NewEncoder(rw).Encode(v)
 	if err != nil {
 		errorMessage := "error encoding response body"
@@ -133,7 +134,5 @@ func controllerEncodeResponse(rw http.ResponseWriter, log *logrus.Entry, statusC
 		writeErrorResponse(rw, errorStatusCode, errorMessage, err)
 		return fmt.Errorf("error encoding response body")
 	}
-	rw.Header().Add("Content-Type", "application/json")
-	rw.WriteHeader(statusCode)
 	return nil
 }

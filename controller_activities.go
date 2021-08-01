@@ -71,7 +71,7 @@ func getActivitiesGetAllHandlerFunc(baseLog *logrus.Logger, appData *appData) ht
 			return
 		}
 
-		var response GetAllActivitiesResponse
+		response := GetAllActivitiesResponse{}
 		for _, object := range persistenceObjects {
 			activity := object.(*activity)
 			response = append(response, GetAllActivitiesResponseItem{

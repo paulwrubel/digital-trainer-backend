@@ -81,7 +81,7 @@ func getWorkoutsGetAllHandlerFunc(baseLog *logrus.Logger, appData *appData) http
 			return
 		}
 
-		var response GetAllWorkoutsResponse
+		response := GetAllWorkoutsResponse{}
 		for _, object := range persistenceObjects {
 			workout := object.(*workout)
 			response = append(response, GetAllWorkoutsResponseItem{
