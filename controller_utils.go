@@ -48,7 +48,7 @@ func controllerCheckExists(rw http.ResponseWriter, o persistenceObject, log *log
 		return fmt.Errorf("error checking existence: %w", err)
 	}
 	if !exists {
-		errorMessage := o.Type() + "does not exist"
+		errorMessage := o.Type() + " does not exist"
 		errorStatusCode := http.StatusNotFound
 
 		log.Error(errorMessage)

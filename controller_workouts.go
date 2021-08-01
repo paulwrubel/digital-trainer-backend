@@ -156,13 +156,13 @@ func getWorkoutsPostHandlerFunc(baseLog *logrus.Logger, appData *appData) http.H
 		}
 
 		// check if row exists
-		err = controllerCheckExists(rw, workout, log, appData)
-		if err != nil {
-			return
-		}
+		// err = controllerCheckExists(rw, workout, log, appData)
+		// if err != nil {
+		// 	return
+		// }
 
-		// get from db
-		err = controllerDatabaseFunc(rw, workout, workout.Get, log, appData)
+		// save from db
+		err = controllerDatabaseFunc(rw, workout, workout.Save, log, appData)
 		if err != nil {
 			return
 		}

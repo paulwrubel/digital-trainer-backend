@@ -125,13 +125,13 @@ func getActivitiesPostHandlerFunc(baseLog *logrus.Logger, appData *appData) http
 		}
 
 		// check if row exists
-		err = controllerCheckExists(rw, activity, log, appData)
-		if err != nil {
-			return
-		}
+		// err = controllerCheckExists(rw, activity, log, appData)
+		// if err != nil {
+		// 	return
+		// }
 
 		// get from db
-		err = controllerDatabaseFunc(rw, activity, activity.Get, log, appData)
+		err = controllerDatabaseFunc(rw, activity, activity.Save, log, appData)
 		if err != nil {
 			return
 		}
