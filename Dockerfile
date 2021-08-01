@@ -1,8 +1,9 @@
-FROM scratch
+# lightweight base image
+FROM alpine:3.12
 
 # add timezone data
 # this allows the user to specify a timezone as an environment variable: TZ
-# RUN apk add --no-cache tzdata
+RUN apk add --no-cache tzdata
 
 # copy go binary into container
 ADD digital_trainer_backend /app/digital_trainer_backend
