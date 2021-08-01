@@ -35,6 +35,11 @@ func initAppData(log *logrus.Logger) (*appData, error) {
 		return nil, fmt.Errorf("cannot initialize digital trainer database: %w", err)
 	}
 
+	err = initDatabaseSchema(log, db)
+	if err != nil {
+		return nil, fmt.Errorf("cannot initialize digital trainer database schema: %w", err)
+	}
+
 	return &appData{
 		config: c,
 		db:     db,
