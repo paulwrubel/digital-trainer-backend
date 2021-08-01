@@ -58,6 +58,21 @@ func controllerCheckExists(rw http.ResponseWriter, o persistenceObject, log *log
 	return nil
 }
 
+func controllerCheckMissingFields(rw http.ResponseWriter, log *logrus.Entry, fields ...interface{}) error {
+	// check for missing fields
+	for _, field := range fields {
+		if field == nil {
+			errorMessage := "missing field from request"
+			errorStatusCode := http.StatusBadRequest
+
+			log.Error(errorMessage)
+			writeErrorResponse(rw, errorStatusCode, errorMessage, nil)
+			return fmt.Errorf("missing field from request")
+		}
+	}
+	return nil
+}
+
 func controllerDatabaseFunc(rw http.ResponseWriter, o persistenceObject, oFunc func(*logrus.Entry, *appData) error, log *logrus.Entry, appData *appData) error {
 	err := oFunc(log, appData)
 	if err != nil {

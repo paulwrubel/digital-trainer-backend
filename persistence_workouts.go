@@ -8,11 +8,11 @@ import (
 )
 
 type workout struct {
-	workoutID  string
-	activityID string
-	timestamp  time.Time
-	calories   int
-	duration   time.Duration
+	workoutID      string
+	activityID     string
+	timestamp      time.Time
+	caloriesBurned int
+	duration       time.Duration
 }
 
 func (a *workout) Type() string {
@@ -31,13 +31,13 @@ func (w *workout) Save(baseLog *logrus.Entry, appData *appData) error {
 			workout_id,
 			activity_id,
 			timestamp,
-			calorie,
+			calories_burned,
 			duration
 		) VALUES ($1,$2,$3,$4,$5)`,
 		w.workoutID,
 		w.activityID,
 		w.timestamp,
-		w.calories,
+		w.caloriesBurned,
 		w.duration,
 	)
 	if err != nil || tag.RowsAffected() != 1 {
@@ -60,14 +60,14 @@ func (w *workout) Get(baseLog *logrus.Entry, appData *appData) error {
 			workout_id,
 			activity_id,
 			timestamp,
-			calorie,
+			calories_burned,
 			duration
 		FROM workouts
 		WHERE workout_id = $1`, w.workoutID).Scan(
 		&w.workoutID,
 		&w.activityID,
 		&w.timestamp,
-		&w.calories,
+		&w.caloriesBurned,
 		&w.duration,
 	)
 	if err != nil {
@@ -90,14 +90,14 @@ func (w *workout) Update(baseLog *logrus.Entry, appData *appData) error {
 			workout_id,
 			activity_id,
 			timestamp,
-			calorie,
+			calories_burned,
 			duration
 		) = ($1,$2,$3,$4,$5)
 		WHERE workout_id = $1`,
 		w.workoutID,
 		w.activityID,
 		w.timestamp,
-		w.calories,
+		w.caloriesBurned,
 		w.duration,
 	)
 	if err != nil || tag.RowsAffected() != 1 {
@@ -160,7 +160,7 @@ func getAllWorkouts(baseLog *logrus.Entry, appData *appData) ([]persistenceObjec
 			workout_id,
 			activity_id,
 			timestamp,
-			calorie,
+			calories_burned,
 			duration
 		FROM workouts`)
 	if err != nil {
@@ -174,7 +174,7 @@ func getAllWorkouts(baseLog *logrus.Entry, appData *appData) ([]persistenceObjec
 			&w.workoutID,
 			&w.activityID,
 			&w.timestamp,
-			&w.calories,
+			&w.caloriesBurned,
 			&w.duration,
 		)
 		if err != nil {

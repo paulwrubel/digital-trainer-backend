@@ -16,7 +16,7 @@ steps:
     commands:
       - GOOS=linux
         GOARCH=amd64
-        go build -o digital_trainer_backend main.go
+        go build -o digital_trainer_backend .
     when:
       branch:
         - main
@@ -40,7 +40,7 @@ steps:
         - main
       event:
         - push
-        
+
   - name: publish
     image: plugins/docker
     settings:
